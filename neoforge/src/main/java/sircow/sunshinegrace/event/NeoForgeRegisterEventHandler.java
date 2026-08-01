@@ -7,7 +7,7 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import sircow.sunshinegrace.Constants;
 import sircow.sunshinegrace.effect.ModEffects;
 
-@EventBusSubscriber(modid = Constants.MOD_ID)
+@EventBusSubscriber(modid = Constants.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class NeoForgeRegisterEventHandler {
     @SubscribeEvent
     public static void register(RegisterEvent event) {

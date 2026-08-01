@@ -74,7 +74,7 @@ public abstract class ServerPlayerMixin extends Player implements FirstJoinTrack
             if (hasJoinedBefore.isEmpty()) hasJoinedBefore = Optional.of(false);
 
             if (!hasJoinedBefore.get()) {
-                this.addEffect(new MobEffectInstance(ModEffects.SUNSHINE_GRACE.holder, 20 * 60 * 10, 0));
+                this.addEffect(new MobEffectInstance(ModEffects.sunshineGraceHolder(), 20 * 60 * 10, 0));
                 hasJoinedBefore = Optional.of(true);
             }
         }

@@ -8,9 +8,9 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "",
-        "sources": "",
-        "issues": ""
+        "homepage": "https://modrinth.com/mod/sunshine-grace",
+        "sources": "https://github.com/Sir-Cow/sunshine-grace",
+        "issues": "https://github.com/Sir-Cow/sunshine-grace/issues"
     },
     "license": "${license}",
     "icon": "icon.png",
@@ -27,12 +27,16 @@
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": "*",
-        "minecraft": "~26.2",
+        "minecraft": "~${minecraft_version}",
         "java": ">=${java_version}"
     },
     "custom": {
         "modmenu": {
-            "update_checker": false
+            "links": {
+                "modmenu.modrinth": "https://modrinth.com/mod/sunshine-grace",
+                "modmenu.curseforge": "https://curseforge.com/minecraft/mc-mods/sunshine-grace"
+            },
+            "update_checker": true
         }
     }
 }

@@ -9,6 +9,6 @@ public class SunshineGrace implements ModInitializer {
     public void onInitialize() {
         CommonClass.init();
         FabricModEffects.registerFabricModEffects();
-        FabricModEvents.registerModEvents();
+        FabricModEvents.registerFabricModEvents();
     }
 }

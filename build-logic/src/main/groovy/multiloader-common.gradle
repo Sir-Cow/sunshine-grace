@@ -1,3 +1,5 @@
+import groovy.json.JsonOutput
+
 plugins {
     id 'java-library'
     id 'maven-publish'
@@ -76,7 +78,7 @@ processResources {
     ]
 
     var jsonExpandProps = expandProps.collectEntries {
-        key, value -> [(key): value instanceof String ? value.replace('\n', '\\\\n') : value]
+        key, value -> [(key): value instanceof String ? JsonOutput.toJson(value).replaceAll('^"|"$', '') : value]
     }
 
     filesMatching(['META-INF/mods.toml', 'META-INF/neoforge.mods.toml']) {

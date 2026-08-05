@@ -1,12 +1,12 @@
 package sircow.sunshinegrace.mixin;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,10 +22,9 @@ public abstract class ServerPlayerMixin extends Player implements FirstJoinTrack
     @Unique private boolean hasCheckedFirstJoin = false;
     @Unique private Optional<Boolean> hasJoinedBefore = Optional.empty();
 
-    public ServerPlayerMixin(Level level, GameProfile gameProfile) {
-        super(level, gameProfile);
+    public ServerPlayerMixin(Level level, BlockPos pos, float yRot, GameProfile gameProfile) {
+        super(level, pos, yRot, gameProfile);
     }
-
     @Override
     public Optional<Boolean> sunshinegrace$getHasJoinedBefore() {
         return hasJoinedBefore;
@@ -47,13 +46,13 @@ public abstract class ServerPlayerMixin extends Player implements FirstJoinTrack
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void sunshinegrace$addAdditionalSaveData(ValueOutput output, CallbackInfo ci) {
-        output.putBoolean("sunshinegrace:hasJoinedBefore", hasJoinedBefore.orElse(false));
+    private void sunshinegrace$addAdditionalSaveData(CompoundTag compoundTag, CallbackInfo ci) {
+        compoundTag.putBoolean("sunshinegrace:hasJoinedBefore", hasJoinedBefore.orElse(false));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void sunshinegrace$readAdditionalSaveData(ValueInput input, CallbackInfo ci) {
-        boolean joinedBefore = input.getBooleanOr("sunshinegrace:hasJoinedBefore", false);
+    private void sunshinegrace$readAdditionalSaveData(CompoundTag compoundTag, CallbackInfo ci) {
+        boolean joinedBefore = compoundTag.getBoolean("sunshinegrace:hasJoinedBefore");
         this.hasJoinedBefore = Optional.of(joinedBefore);
     }
 

@@ -7,7 +7,7 @@ base {
     archivesName = "${mod_id}-forge-${minecraft_version}"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft {
     mappings channel: 'official', version: minecraft_version
@@ -48,7 +48,6 @@ repositories {
 dependencies {
     implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
     compileOnly project(':common')
-    annotationProcessor 'net.minecraftforge:eventbus-validator:7.0.5'
 }
 
 tasks.named('jar', Jar) {

@@ -13,9 +13,16 @@ pluginManagement {
                 includeGroupAndSubgroups('net.fabricmc')
             }
         }
-        maven {
-            name = 'Forge'
-            url = 'https://maven.minecraftforge.net'
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'Forge'
+                    url = uri('https://maven.minecraftforge.net')
+                }
+            }
+            filter {
+                includeGroupAndSubgroups('net.minecraftforge')
+            }
         }
     }
 }

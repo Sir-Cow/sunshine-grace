@@ -11,8 +11,8 @@ public class FabricModEvents {
             if (!(entity instanceof Monster)) return true;
 
             if (source.getEntity() instanceof ServerPlayer player) {
-                if (player.hasEffect(ModEffects.sunshineGraceHolder())) {
-                    player.removeEffect(ModEffects.sunshineGraceHolder());
+                if (player.hasEffect(ModEffects.SUNSHINE_GRACE)) {
+                    player.removeEffect(ModEffects.SUNSHINE_GRACE);
                 }
             }
             return true;

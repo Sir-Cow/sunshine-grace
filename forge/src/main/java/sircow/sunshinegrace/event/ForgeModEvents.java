@@ -15,8 +15,8 @@ public class ForgeModEvents {
         if (!(event.getEntity() instanceof Monster)) return;
 
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
-            if (player.hasEffect(ModEffects.sunshineGraceHolder())) {
-                player.removeEffect(ModEffects.sunshineGraceHolder());
+            if (player.hasEffect(ModEffects.SUNSHINE_GRACE)) {
+                player.removeEffect(ModEffects.SUNSHINE_GRACE);
             }
         }
     }

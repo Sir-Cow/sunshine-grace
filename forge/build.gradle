@@ -1,13 +1,13 @@
 plugins {
     id 'multiloader-loader'
-    id 'net.minecraftforge.gradle' version '[7.0.31,8.0)'
+    id 'net.minecraftforge.gradle' version '7.0.34'
     id 'net.minecraftforge.jarjar' version '0.2.3'
 }
 base {
     archivesName = "${mod_id}-forge-${minecraft_version}"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft {
     mappings channel: 'official', version: minecraft_version

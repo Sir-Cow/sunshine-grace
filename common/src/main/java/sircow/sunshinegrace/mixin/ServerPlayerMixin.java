@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sircow.sunshinegrace.config.ConfigManager;
 import sircow.sunshinegrace.effect.ModEffects;
 import sircow.sunshinegrace.other.FirstJoinTracker;
 
@@ -74,7 +75,9 @@ public abstract class ServerPlayerMixin extends Player implements FirstJoinTrack
             if (hasJoinedBefore.isEmpty()) hasJoinedBefore = Optional.of(false);
 
             if (!hasJoinedBefore.get()) {
-                this.addEffect(new MobEffectInstance(ModEffects.sunshineGraceHolder(), 20 * 60 * 10, 0));
+                if (ConfigManager.getServer().enableFirstJoinEffect) {
+                    this.addEffect(new MobEffectInstance(ModEffects.sunshineGraceHolder(), ConfigManager.getServer().duration, 0));
+                }
                 hasJoinedBefore = Optional.of(true);
             }
         }

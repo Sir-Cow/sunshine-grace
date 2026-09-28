@@ -36,18 +36,25 @@ public final class ConfigManager {
             return;
         }
 
+        boolean missingKeys;
+
         try (Reader reader = Files.newBufferedReader(configFile, StandardCharsets.UTF_8)) {
             JsonElement element = JsonParser.parseReader(reader);
 
             if (!element.isJsonObject()) throw new IOException("Config root is not a JSON object");
 
-            serverConfig = fromJson(element.getAsJsonObject(), new ServerModConfig());
+            JsonObject json = element.getAsJsonObject();
+            serverConfig = fromJson(json, new ServerModConfig());
+            JsonObject defaults = GSON.toJsonTree(new ServerModConfig()).getAsJsonObject();
+            missingKeys = !json.keySet().containsAll(defaults.keySet());
         }
         catch (Exception exception) {
             Constants.LOG.error("Failed to load {}, using defaults", configFile, exception);
             serverConfig = new ServerModConfig();
-            saveServer(configDirectory);
+            missingKeys = true;
         }
+
+        if (missingKeys) saveServer(configDirectory);
     }
 
     public static void saveServer(Path configDirectory) {
@@ -55,6 +62,7 @@ public final class ConfigManager {
         JsonObject json = new JsonObject();
 
         json.addProperty("enableFirstJoinEffect", serverConfig.enableFirstJoinEffect);
+        json.addProperty("enableAttackingMonsterRemovesEffect", serverConfig.enableAttackingMonsterRemovesEffect);
         json.addProperty("duration", serverConfig.duration);
         json.addProperty("minimumYValue", serverConfig.minimumYValue);
 
@@ -67,6 +75,7 @@ public final class ConfigManager {
 
     private static ServerModConfig fromJson(JsonObject json, ServerModConfig config) {
         config.enableFirstJoinEffect = getBoolean(json, "enableFirstJoinEffect", config.enableFirstJoinEffect);
+        config.enableAttackingMonsterRemovesEffect = getBoolean(json, "enableAttackingMonsterRemovesEffect", config.enableAttackingMonsterRemovesEffect);
         config.duration = getInt(json, "duration", config.duration, 1, Integer.MAX_VALUE);
         config.minimumYValue = getDouble(json, "minimumYValue", config.minimumYValue, ServerLevel.MIN_ENTITY_SPAWN_Y, ServerLevel.MAX_ENTITY_SPAWN_Y);
 

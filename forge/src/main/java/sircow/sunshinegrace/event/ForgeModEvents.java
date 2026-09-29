@@ -6,16 +6,17 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import sircow.sunshinegrace.Constants;
+import sircow.sunshinegrace.config.ConfigManager;
 import sircow.sunshinegrace.effect.ModEffects;
 
 @Mod.EventBusSubscriber(modid = Constants.MOD_ID)
 public class ForgeModEvents {
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event) {
-        if (!(event.getEntity() instanceof Monster)) return;
+        if (!(event.getEntity() instanceof Monster) || !ConfigManager.getServer().enableAttackingMonsterRemovesEffect) return;
 
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
-            if (player.hasEffect(ModEffects.SUNSHINE_GRACE)) {
+            if (player.hasEffect(ModEffects.SUNSHINE_GRACE) && !player.isCreative() && !player.isSpectator()) {
                 player.removeEffect(ModEffects.SUNSHINE_GRACE);
             }
         }

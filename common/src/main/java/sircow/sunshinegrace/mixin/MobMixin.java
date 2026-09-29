@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import sircow.sunshinegrace.config.ConfigManager;
 import sircow.sunshinegrace.effect.ModEffects;
 
 @Mixin(Mob.class)
@@ -15,7 +16,7 @@ public class MobMixin {
     private void sunshinegrace$preventTargetWithSunshineGrace(LivingEntity target, CallbackInfo ci) {
         if (target instanceof Player player) {
             if (player.hasEffect(ModEffects.SUNSHINE_GRACE)) {
-                if (player.getY() >= 60.0D) {
+                if (player.getY() >= ConfigManager.getServer().minimumYValue) {
                     ci.cancel();
                 }
             }

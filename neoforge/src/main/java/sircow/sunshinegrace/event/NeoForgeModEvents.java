@@ -6,16 +6,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import sircow.sunshinegrace.Constants;
+import sircow.sunshinegrace.config.ConfigManager;
 import sircow.sunshinegrace.effect.ModEffects;
 
 @EventBusSubscriber(modid = Constants.MOD_ID)
 public class NeoForgeModEvents {
     @SubscribeEvent
     public static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
-        if (!(event.getEntity() instanceof Monster)) return;
+        if (!(event.getEntity() instanceof Monster) || !ConfigManager.getServer().enableAttackingMonsterRemovesEffect) return;
 
         if (event.getSource().getEntity() instanceof ServerPlayer player) {
-            if (player.hasEffect(ModEffects.sunshineGraceHolder())) {
+            if (player.hasEffect(ModEffects.sunshineGraceHolder()) && !player.isCreative() && !player.isSpectator()) {
                 player.removeEffect(ModEffects.sunshineGraceHolder());
             }
         }

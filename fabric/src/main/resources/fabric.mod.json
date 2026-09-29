@@ -17,7 +17,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "sircow.sunshinegrace.SunshineGrace"
+            "sircow.sunshinegrace.FabricSunshineGrace"
         ]
     },
     "mixins": [

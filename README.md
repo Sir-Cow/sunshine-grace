@@ -14,9 +14,9 @@ Sunshine Grace aims to assist new players joining in the middle of the night and
 
 ## 🔧 Config
 
-Different changes to how the Sunshine Grace functions can be changed in the config file.
+Different changes to how Sunshine Grace functions can be changed in the config file.
 
-```
+```json
 {
   "enableFirstJoinEffect": true,
   "enableAttackingMonsterRemovesEffect": true,

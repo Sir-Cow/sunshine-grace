@@ -81,7 +81,7 @@ processResources {
         key, value -> [(key): value instanceof String ? JsonOutput.toJson(value).replaceAll('^"|"$', '') : value]
     }
 
-    filesMatching(['META-INF/mods.toml', 'META-INF/neoforge.mods.toml']) {
+    filesMatching(['META-INF/mods.toml', 'META-INF/neoforge.mods.toml', 'plugin.yml']) {
         expand expandProps
     }
 

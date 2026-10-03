@@ -1,0 +1,26 @@
+name: ${mod_id}
+prefix: ${mod_name}
+version: '${version}'
+main: sircow.sunshinegrace.PaperSunshineGrace
+description: '${description}'
+authors: ['${mod_author}']
+website: https://github.com/Sir-Cow/sunshine-grace
+api-version: '${minecraft_version}'
+load: POSTWORLD
+
+commands:
+  sunshinegrace:
+    description: |-
+      Manage sunshine grace.
+      /sunshinegrace position <actionbar|bossbar> - choose where the timer is displayed
+      /sunshinegrace set <player> [ticks] - set or remove a player's grace period (requires sunshinegrace.command.set)
+      /sunshinegrace config [setting] [value] - view or change config settings (requires sunshinegrace.command.config)
+    usage: /sunshinegrace <position|set|config>
+
+permissions:
+  sunshinegrace.command.set:
+    description: Allows setting the sunshine grace effect on a player
+    default: op
+  sunshinegrace.command.config:
+    description: Allows changing the sunshine grace config settings
+    default: op

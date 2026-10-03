@@ -73,6 +73,14 @@ public final class ConfigManager {
         return serverConfig;
     }
 
+    public static double getMinimumYLowerBound() {
+        return ServerLevel.MIN_ENTITY_SPAWN_Y;
+    }
+
+    public static double getMinimumYUpperBound() {
+        return ServerLevel.MAX_ENTITY_SPAWN_Y;
+    }
+
     private static ServerModConfig fromJson(JsonObject json, ServerModConfig config) {
         config.enableFirstJoinEffect = getBoolean(json, "enableFirstJoinEffect", config.enableFirstJoinEffect);
         config.enableAttackingMonsterRemovesEffect = getBoolean(json, "enableAttackingMonsterRemovesEffect", config.enableAttackingMonsterRemovesEffect);
